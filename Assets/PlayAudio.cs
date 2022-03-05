@@ -9,6 +9,7 @@ public class PlayAudio : MonoBehaviour
     int randomNum;
     AudioClip audio1;
     AudioClip audio2;
+
     public Dictionary<int, string> IntervalsInOctave = new Dictionary<int, string>()
     {
         {1,"1"},
@@ -33,6 +34,12 @@ public class PlayAudio : MonoBehaviour
     int[] minor0 = new int[2] { 4, 5 };
     int[] minor1 = new int[2] { 5, 6 };
     int[] minor2 = new int[2] { 6, 4 };
+
+    int[] D7 = new int[3] { 5, 4, 4 };
+    int[] D65 = new int[3] { 4, 4, 3 };
+    int[] D43 = new int[3] { 4, 3, 5 };
+    int[] D2 = new int[3] { 3, 5, 4 };
+
     [SerializeField]
     private GameObject NotePlayer;
 
@@ -60,12 +67,11 @@ public class PlayAudio : MonoBehaviour
         {
 
             playTriad(inversion, scale, true);
-            
 
         }
+
         
     }
-
 
     void playRandomNote()
     {
@@ -149,7 +155,8 @@ public class PlayAudio : MonoBehaviour
 
         yield return null;
     }
-    void playTriad(int inversion, int scale, bool isMelodic = false)
+
+    public void playTriad(int inversion, int scale, bool isMelodic = false)
     {
 
         GameObject newNote = Instantiate(NotePlayer);
@@ -217,11 +224,11 @@ public class PlayAudio : MonoBehaviour
                     {
                         if (isMelodic)
                         {
-                            StartCoroutine(playMelodicTriad(newNote, (AudioClip)audioClips[randomNum], (AudioClip)audioClips[randomNum + minor0[0] - 1], (AudioClip)audioClips[randomNum + minor0[1] + minor0[0] - 2]));
+                            StartCoroutine(playMelodicTriad(newNote, (AudioClip)audioClips[randomNum], (AudioClip)audioClips[randomNum + minor1[0] - 1], (AudioClip)audioClips[randomNum + minor1[1] + minor1[0] - 2]));
                         }
                         else
                         {
-                            StartCoroutine(playHarmonicTriad(newNote, (AudioClip)audioClips[randomNum], (AudioClip)audioClips[randomNum + minor0[0] - 1], (AudioClip)audioClips[randomNum + minor0[1] + minor0[0] - 2]));
+                            StartCoroutine(playHarmonicTriad(newNote, (AudioClip)audioClips[randomNum], (AudioClip)audioClips[randomNum + minor1[0] - 1], (AudioClip)audioClips[randomNum + minor1[1] + minor1[0] - 2]));
                         }
                     }
 
@@ -229,11 +236,11 @@ public class PlayAudio : MonoBehaviour
                     {
                         if (isMelodic)
                         {
-                            StartCoroutine(playMelodicTriad(newNote, (AudioClip)audioClips[randomNum], (AudioClip)audioClips[randomNum + minor0[0] - 1], (AudioClip)audioClips[randomNum + minor0[1] + minor0[0] - 2]));
+                            StartCoroutine(playMelodicTriad(newNote, (AudioClip)audioClips[randomNum], (AudioClip)audioClips[randomNum + minor2[0] - 1], (AudioClip)audioClips[randomNum + minor2[1] + minor2[0] - 2]));
                         }
                         else
                         {
-                            StartCoroutine(playHarmonicTriad(newNote, (AudioClip)audioClips[randomNum], (AudioClip)audioClips[randomNum + minor0[0] - 1], (AudioClip)audioClips[randomNum + minor0[1] + minor0[0] - 2]));
+                            StartCoroutine(playHarmonicTriad(newNote, (AudioClip)audioClips[randomNum], (AudioClip)audioClips[randomNum + minor2[0] - 1], (AudioClip)audioClips[randomNum + minor2[1] + minor2[0] - 2]));
                         }
                     }
                     break;
@@ -241,6 +248,87 @@ public class PlayAudio : MonoBehaviour
         }
 
 
+    }
+
+    IEnumerator playHarmonicDominant(GameObject newNote, AudioClip audio1, AudioClip audio2, AudioClip audio3, AudioClip audio4)
+    {
+        newNote.GetComponent<AudioSource>().PlayOneShot(audio1);
+        newNote.GetComponent<AudioSource>().PlayOneShot(audio2);
+        newNote.GetComponent<AudioSource>().PlayOneShot(audio3);
+        newNote.GetComponent<AudioSource>().PlayOneShot(audio4);
+        yield return new WaitForSeconds(0.5f);
+        Destroy(newNote, 1);
+
+        yield return null;
+    }
+    IEnumerator playMelodicDominant(GameObject newNote, AudioClip audio1, AudioClip audio2, AudioClip audio3, AudioClip audio4)
+    {
+        newNote.GetComponent<AudioSource>().PlayOneShot(audio1);
+        yield return new WaitForSeconds(0.5f);
+        newNote.GetComponent<AudioSource>().PlayOneShot(audio2);
+        yield return new WaitForSeconds(0.5f);
+        newNote.GetComponent<AudioSource>().PlayOneShot(audio3);
+        yield return new WaitForSeconds(0.5f);
+        newNote.GetComponent<AudioSource>().PlayOneShot(audio4);
+        yield return new WaitForSeconds(0.5f);
+        Destroy(newNote, 1);
+
+        yield return null;
+    }
+
+    public void playDominant(int inversion, bool isMelodic)
+    {
+
+        GameObject newNote = Instantiate(NotePlayer);
+        randomNum = Random.Range(1, audioClips.Length - 13);
+
+        if (inversion == 1)
+        {
+
+            if (isMelodic)
+            {
+                StartCoroutine(playMelodicDominant(newNote, (AudioClip)audioClips[randomNum], (AudioClip)audioClips[randomNum + D7[0] - 1], (AudioClip)audioClips[randomNum + D7[1] + D7[0] - 2], (AudioClip)audioClips[randomNum + D7[2] + D7[1] +D7[0]- 3]));
+            }
+            else
+            {
+                StartCoroutine(playHarmonicDominant(newNote, (AudioClip)audioClips[randomNum], (AudioClip)audioClips[randomNum + D7[0] - 1], (AudioClip)audioClips[randomNum + D7[1] + D7[0] - 2], (AudioClip)audioClips[randomNum + D7[2] + D7[1] + D7[0] - 3]));
+            }
+        }
+
+        else if (inversion == 2)
+        {
+            if (isMelodic)
+            {
+                StartCoroutine(playMelodicDominant(newNote, (AudioClip)audioClips[randomNum], (AudioClip)audioClips[randomNum + D65[0] - 1], (AudioClip)audioClips[randomNum + D65[1] + D65[0] - 2], (AudioClip)audioClips[randomNum + D65[2] + D65[1] + D65[0] - 3]));
+            }
+            else
+            {
+                StartCoroutine(playHarmonicDominant(newNote, (AudioClip)audioClips[randomNum], (AudioClip)audioClips[randomNum + D65[0] - 1], (AudioClip)audioClips[randomNum + D65[1] + D65[0] - 2], (AudioClip)audioClips[randomNum + D65[2] + D65[1] + D65[0] - 3]));
+            }
+        }
+
+        else if (inversion == 3)
+        {
+            if (isMelodic)
+            {
+                StartCoroutine(playMelodicDominant(newNote, (AudioClip)audioClips[randomNum], (AudioClip)audioClips[randomNum + D43[0] - 1], (AudioClip)audioClips[randomNum + D43[1] + D43[0] - 2], (AudioClip)audioClips[randomNum + D43[2] + D43[1] + D43[0] - 3]));
+            }
+            else
+            {
+                StartCoroutine(playHarmonicDominant(newNote, (AudioClip)audioClips[randomNum], (AudioClip)audioClips[randomNum + D43[0] - 1], (AudioClip)audioClips[randomNum + D43[1] + D43[0] - 2], (AudioClip)audioClips[randomNum + D43[2] + D43[1] + D43[0] - 3]));
+            }
+        }
+        else if (inversion == 4)
+        {
+            if (isMelodic)
+            {
+                StartCoroutine(playMelodicDominant(newNote, (AudioClip)audioClips[randomNum], (AudioClip)audioClips[randomNum + D2[0] - 1], (AudioClip)audioClips[randomNum + D2[1] + D2[0] - 2], (AudioClip)audioClips[randomNum + D2[2] + D2[1] + D2[0] - 3]));
+            }
+            else
+            {
+                StartCoroutine(playHarmonicDominant(newNote, (AudioClip)audioClips[randomNum], (AudioClip)audioClips[randomNum + D2[0] - 1], (AudioClip)audioClips[randomNum + D2[1] + D2[0] - 2], (AudioClip)audioClips[randomNum + D2[2] + D2[1] + D2[0] - 3]));
+            }
+        }
     }
 
 }
