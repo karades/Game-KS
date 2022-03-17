@@ -26,6 +26,11 @@ public class GuessIntervalMode : MonoBehaviour
 
     string wrongIntervalText;
     string intervalText;
+
+    //mo¿e nie tutaj, na test kwarty i kwinty
+    bool[] isInterval = new bool[] { false,false,false,false,false,false,true,false,true,false,false,false,false };
+    List<int> intervalsToGuess = new List<int>();
+
     void Start()
     {
         changeButtons();
@@ -41,8 +46,26 @@ public class GuessIntervalMode : MonoBehaviour
 
     void setRandomInterval()
     {
-
         resultInterval = Random.Range(1,13);
+    }
+
+    List<int> getIntervalsList()
+    {
+        intervalsToGuess.Clear();
+        //co z isInterval? Z innej klasy?
+        for (int i = 0; i < isInterval.Length; i++)
+        {
+            if (isInterval[i])
+            {
+                intervalsToGuess.Add(i);
+            }
+        }
+        return intervalsToGuess;
+    }
+    void setSpecificIntervals(bool[] isIntervalsF)
+    {
+        getIntervalsList();
+        resultInterval = intervalsToGuess[Random.Range(0, intervalsToGuess.Count)];
     }
     void changeButtons()
     {
@@ -51,7 +74,8 @@ public class GuessIntervalMode : MonoBehaviour
 
         setResultText();
 
-        setRandomInterval();
+        //setRandomInterval();
+        setSpecificIntervals(isInterval);
 
         if (Random.Range(1,10)%2 == 1)
         {
@@ -91,8 +115,9 @@ public class GuessIntervalMode : MonoBehaviour
 
             button1.onClick.AddListener(changeButtons);
         }
-        playAudio.playOctaveInterval(resultInterval);
+        playAudio.playOctaveInterval(resultInterval, false, true);
     }
+
 
     void goodAnswer()
     {
@@ -106,7 +131,7 @@ public class GuessIntervalMode : MonoBehaviour
     }
     void playInterval()
     {
-        playAudio.playOctaveInterval(resultInterval);
+        playAudio.playOctaveInterval(resultInterval) ;
     }
     void setResultText()
     {

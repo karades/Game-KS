@@ -61,7 +61,7 @@ public class PlayAudio : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            playOctaveInterval(8, true, true) ;
+            playOctaveInterval(8, true, false) ;
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
