@@ -256,6 +256,7 @@ public class PlayAudio : MonoBehaviour
         newNote.GetComponent<AudioSource>().PlayOneShot(audio2);
         newNote.GetComponent<AudioSource>().PlayOneShot(audio3);
         newNote.GetComponent<AudioSource>().PlayOneShot(audio4);
+
         yield return new WaitForSeconds(0.5f);
         Destroy(newNote, 1);
 

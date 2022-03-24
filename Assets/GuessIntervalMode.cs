@@ -28,7 +28,7 @@ public class GuessIntervalMode : MonoBehaviour
     string intervalText;
 
     //mo¿e nie tutaj, na test kwarty i kwinty
-    bool[] isInterval = new bool[] { false,false,false,false,false,false,true,false,true,false,false,false,false };
+    bool[] isInterval = new bool[] { false,false,false,false,false,true, false, true, false, false,false,false,false };
     List<int> intervalsToGuess = new List<int>();
 
     void Start()
@@ -57,7 +57,7 @@ public class GuessIntervalMode : MonoBehaviour
         {
             if (isInterval[i])
             {
-                intervalsToGuess.Add(i);
+                intervalsToGuess.Add(i+1);
             }
         }
         return intervalsToGuess;
