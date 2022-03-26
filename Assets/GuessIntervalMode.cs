@@ -20,6 +20,9 @@ public class GuessIntervalMode : MonoBehaviour
     [SerializeField]
     Text resultText;
 
+    [SerializeField]
+    CustomIntervalSettingsScriptable customIntervalSettingsScriptable;
+
     int result = 0;
 
     int resultInterval;
@@ -31,6 +34,8 @@ public class GuessIntervalMode : MonoBehaviour
     bool[] isInterval = new bool[] { false,false,false,false,false,true, false, true, false, false,false,false,false };
     List<int> intervalsToGuess = new List<int>();
 
+    [SerializeField]
+    bool isDevMode = true;
     void Start()
     {
         changeButtons();
@@ -75,7 +80,11 @@ public class GuessIntervalMode : MonoBehaviour
         setResultText();
 
         //setRandomInterval();
-        setSpecificIntervals(isInterval);
+        if (customIntervalSettingsScriptable && !isDevMode) { setSpecificIntervals(customIntervalSettingsScriptable.isInterval); }
+        else
+        {
+            setSpecificIntervals(isInterval);
+        }
 
         if (Random.Range(1,10)%2 == 1)
         {

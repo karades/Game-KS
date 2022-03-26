@@ -1114,6 +1114,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1614093107}
     - target: {fileID: 1309364330169187706, guid: 904f9f55df16b81479c0d872c171324d, type: 3}
+      propertyPath: isDevMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1309364330169187706, guid: 904f9f55df16b81479c0d872c171324d, type: 3}
       propertyPath: resultText
       value: 
       objectReference: {fileID: 1269215112}
@@ -1121,6 +1125,10 @@ PrefabInstance:
       propertyPath: playIntervalButton
       value: 
       objectReference: {fileID: 491583749}
+    - target: {fileID: 1309364330169187706, guid: 904f9f55df16b81479c0d872c171324d, type: 3}
+      propertyPath: customIntervalSettingsScriptable
+      value: 
+      objectReference: {fileID: 11400000, guid: adaecd930e5891c44a882e57e69d0cae, type: 2}
     - target: {fileID: 1309364330169187711, guid: 904f9f55df16b81479c0d872c171324d, type: 3}
       propertyPath: m_Name
       value: Controller

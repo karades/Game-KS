@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CustomIntervalMode : MonoBehaviour
@@ -11,6 +12,8 @@ public class CustomIntervalMode : MonoBehaviour
     [SerializeField]
     Toggle[] intervalToogles;
 
+    [SerializeField]
+    CustomIntervalSettingsScriptable customIntervalSettingsScriptable;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,9 +42,18 @@ public class CustomIntervalMode : MonoBehaviour
         return isInterval;
 
     }
-
+    void setIntervalsCustom()
+    {
+        for(int i = 0; i < 13; i++)
+        {
+            customIntervalSettingsScriptable.isInterval[i] = isIntervalOn[i];
+        }
+  
+    }
     public void goToIntervalGame()
     {
+        setIntervalsCustom();
+        SceneManager.LoadScene("SceneGuessInterval");
         //TODO SCRIPTABLE Z ISINTERVAL DO CUSTOM I DO NORMALNEGO SAAVEA
         //TODO POJSCIE DO KOLEJNEJ SCENY Z DANYMI Z SCRIPTABLE
     }
