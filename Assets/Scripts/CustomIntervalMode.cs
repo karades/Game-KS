@@ -14,12 +14,18 @@ public class CustomIntervalMode : MonoBehaviour
 
     [SerializeField]
     CustomIntervalSettingsScriptable customIntervalSettingsScriptable;
+
+    PlayAudio playAudio = new PlayAudio();
+    SceneMaster sceneMaster = new SceneMaster();
     // Start is called before the first frame update
     void Start()
     {
+        string toogleText;
         foreach (Toggle toogle in intervalToogles)
         {
-            toogle.gameObject.GetComponentInChildren<Text>().text = toogle.name;
+           
+            playAudio.IntervalsInOctave.TryGetValue(System.Int32.Parse(toogle.name), out toogleText);
+            toogle.gameObject.GetComponentInChildren<Text>().text = toogleText;
         }
     }
 
@@ -53,7 +59,7 @@ public class CustomIntervalMode : MonoBehaviour
     public void goToIntervalGame()
     {
         setIntervalsCustom();
-        SceneManager.LoadScene("SceneGuessInterval");
+        sceneMaster.SceneLoad("SceneGuessInterval");
         //TODO SCRIPTABLE Z ISINTERVAL DO CUSTOM I DO NORMALNEGO SAAVEA
         //TODO POJSCIE DO KOLEJNEJ SCENY Z DANYMI Z SCRIPTABLE
     }

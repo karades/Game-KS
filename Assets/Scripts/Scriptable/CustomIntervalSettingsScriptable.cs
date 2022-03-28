@@ -7,5 +7,4 @@ public class CustomIntervalSettingsScriptable : ScriptableObject
 {
 
     public bool[] isInterval = new bool[13];
-
 }
