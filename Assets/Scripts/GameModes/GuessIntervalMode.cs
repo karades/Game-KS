@@ -37,7 +37,7 @@ public class GuessIntervalMode : MonoBehaviour
     string intervalText;
 
     //mo¿e nie tutaj, na test kwarty i kwinty, zostawione do deva
-    bool[] isInterval = new bool[] { false,false,false,false,false,true, false, true, false, false,false,false,false };
+    bool[] isInterval = new bool[] { true,false,false,false,false,true, false, true, false, false,false,false,true };
 
     List<int> intervalsToGuess = new List<int>();
 
@@ -82,8 +82,8 @@ public class GuessIntervalMode : MonoBehaviour
     }
     void setSpecificIntervals(bool[] isIntervalsF)
     {
-        getIntervalsList();
-        resultInterval = intervalsToGuess[UnityEngine.Random.Range(0, intervalsToGuess.Count)];
+        
+        resultInterval = getIntervalsList()[UnityEngine.Random.Range(0, intervalsToGuess.Count)];
     }
     void changeButtons()
     {
@@ -93,7 +93,9 @@ public class GuessIntervalMode : MonoBehaviour
         setResultText();
 
         //setRandomInterval();
-        if (customIntervalSettingsScriptable && !isDevMode) { setSpecificIntervals(customIntervalSettingsScriptable.isInterval); }
+        if (customIntervalSettingsScriptable && !isDevMode) { 
+            setSpecificIntervals(customIntervalSettingsScriptable.isInterval); 
+        }
         else
         {
             setSpecificIntervals(isInterval);
@@ -105,18 +107,26 @@ public class GuessIntervalMode : MonoBehaviour
 
             button1.gameObject.GetComponentInChildren<Text>().text = intervalText;
 
-            button1.onClick.AddListener(goodAnswer);
+            button1.onClick.AddListener(wrongAnswer);
 
             //define random interval for second guess from selected intervals
             playAudio.IntervalsInOctave.TryGetValue(resultInterval, out wrongIntervalText);
             while (wrongIntervalText == intervalText)
             {
-                playAudio.IntervalsInOctave.TryGetValue((resultInterval), out wrongIntervalText);
+                if (customIntervalSettingsScriptable && !isDevMode)
+                {
+                    setSpecificIntervals(customIntervalSettingsScriptable.isInterval);
+                }
+                else
+                {
+                    setSpecificIntervals(isInterval);
+                }
+                playAudio.IntervalsInOctave.TryGetValue(resultInterval, out wrongIntervalText);
             }
 
             button2.gameObject.GetComponentInChildren<Text>().text = wrongIntervalText;
 
-            button2.onClick.AddListener(wrongAnswer);
+            button2.onClick.AddListener(goodAnswer);
         }
         else
         {
@@ -124,18 +134,26 @@ public class GuessIntervalMode : MonoBehaviour
 
             button2.gameObject.GetComponentInChildren<Text>().text = intervalText;
 
-            button2.onClick.AddListener(goodAnswer);
+            button2.onClick.AddListener(wrongAnswer);
 
             //define random interval for second guess
             playAudio.IntervalsInOctave.TryGetValue(resultInterval, out wrongIntervalText);
             while (wrongIntervalText == intervalText)
             {
+                if (customIntervalSettingsScriptable && !isDevMode)
+                {
+                    setSpecificIntervals(customIntervalSettingsScriptable.isInterval);
+                }
+                else
+                {
+                    setSpecificIntervals(isInterval);
+                }
                 playAudio.IntervalsInOctave.TryGetValue(resultInterval, out wrongIntervalText);
             }
 
             button1.gameObject.GetComponentInChildren<Text>().text = wrongIntervalText;
 
-            button1.onClick.AddListener(wrongAnswer);
+            button1.onClick.AddListener(goodAnswer);
         }
         playAudio.playOctaveInterval(resultInterval, false, true);
     }
@@ -151,6 +169,7 @@ public class GuessIntervalMode : MonoBehaviour
         if(HP > 0)
         {
             HP--;
+            setHPText();
             changeButtons();
         }
         else
@@ -165,7 +184,7 @@ public class GuessIntervalMode : MonoBehaviour
     }
     void playInterval()
     {
-        playAudio.playOctaveInterval(resultInterval) ;
+        playAudio.playOctaveInterval(resultInterval,true,true) ;
     }
     void setResultText()
     {
@@ -173,6 +192,13 @@ public class GuessIntervalMode : MonoBehaviour
     }
     private void setHPText()
     {
-        HPText.text = HP.ToString(); ;
+        if (HPText)
+        {
+            HPText.text = HP.ToString();
+        }
+        else
+        {
+            Debug.LogWarning("No HP text set in " + this);
+        }
     }
 }
