@@ -1206,6 +1206,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1269215112}
     - target: {fileID: 1309364330169187706, guid: 904f9f55df16b81479c0d872c171324d, type: 3}
+      propertyPath: isStableNote
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1309364330169187706, guid: 904f9f55df16b81479c0d872c171324d, type: 3}
       propertyPath: playIntervalButton
       value: 
       objectReference: {fileID: 491583749}

@@ -28,9 +28,9 @@ public class DevPlayAudio : MonoBehaviour
     // Update is called once per frame
     void Start()
     {
-        Triad1.onClick.AddListener(delegate { playAudio.playTriad(1, 0, isMelodic.isOn); });
-        Triad2.onClick.AddListener(delegate { playAudio.playTriad(2, 0, isMelodic.isOn); });
-        Triad3.onClick.AddListener(delegate { playAudio.playTriad(3, 0, isMelodic.isOn); });
+        Triad1.onClick.AddListener(delegate { playAudio.playTriad(0, 1, isMelodic.isOn); });
+        Triad2.onClick.AddListener(delegate { playAudio.playTriad(0, 2, isMelodic.isOn); });
+        Triad3.onClick.AddListener(delegate { playAudio.playTriad(0, 3, isMelodic.isOn); });
 
         Dominant7.onClick.AddListener(delegate { playAudio.playDominant(1, isMelodic.isOn); });
         Dominant56.onClick.AddListener(delegate { playAudio.playDominant(2, isMelodic.isOn); });

@@ -42,6 +42,9 @@ public class GuessIntervalMode : MonoBehaviour
     List<int> intervalsToGuess = new List<int>();
 
     [SerializeField]
+    bool isStableNote = true;
+
+    [SerializeField]
     bool isDevMode = true;
     void Start()
     {
@@ -155,7 +158,8 @@ public class GuessIntervalMode : MonoBehaviour
 
             button1.onClick.AddListener(goodAnswer);
         }
-        playAudio.playOctaveInterval(resultInterval, false, true);
+
+        playAudio.playOctaveInterval(resultInterval, false, true, isStableNote);
     }
 
 
@@ -163,6 +167,7 @@ public class GuessIntervalMode : MonoBehaviour
     {
         result += 1;
         changeButtons();
+        playAudio.setBoolIsStableNote(false);
     }
     void wrongAnswer()
     {
@@ -184,7 +189,7 @@ public class GuessIntervalMode : MonoBehaviour
     }
     void playInterval()
     {
-        playAudio.playOctaveInterval(resultInterval,true,true) ;
+        playAudio.playOctaveInterval(resultInterval,true,true,isStableNote) ;
     }
     void setResultText()
     {
