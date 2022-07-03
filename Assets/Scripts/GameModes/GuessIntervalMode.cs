@@ -2,6 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
+using UnityEngine.Localization.SmartFormat.Extensions;
+using UnityEngine.Localization.SmartFormat.PersistentVariables;
 using UnityEngine.UI;
 
 public class GuessIntervalMode : MonoBehaviour
@@ -26,7 +29,7 @@ public class GuessIntervalMode : MonoBehaviour
     [SerializeField]
     CustomIntervalSettingsScriptable customIntervalSettingsScriptable;
 
-    int result = 0;
+    public int result = 0;
 
     [SerializeField]
     int HP = 3;
@@ -37,7 +40,7 @@ public class GuessIntervalMode : MonoBehaviour
     string intervalText;
 
     //mo¿e nie tutaj, na test kwarty i kwinty, zostawione do deva
-    bool[] isInterval = new bool[] { true,false,false,false,false,true, false, true, false, false,false,false,true };
+    bool[] isInterval = new bool[] { true, false, false, false, false, true, false, true, false, false, false, false, true };
 
     List<int> intervalsToGuess = new List<int>();
 
@@ -46,6 +49,10 @@ public class GuessIntervalMode : MonoBehaviour
 
     [SerializeField]
     bool isDevMode = true;
+
+    bool isUp = false;
+    public bool IsUp { get; set; }
+
     void Start()
     {
 
@@ -84,8 +91,7 @@ public class GuessIntervalMode : MonoBehaviour
         return intervalsToGuess;
     }
     void setSpecificIntervals(bool[] isIntervalsF)
-    {
-        
+    {   
         resultInterval = getIntervalsList()[UnityEngine.Random.Range(0, intervalsToGuess.Count)];
     }
     void changeButtons()
@@ -95,7 +101,7 @@ public class GuessIntervalMode : MonoBehaviour
 
         setResultText();
 
-        //setRandomInterval();
+        //TODO coœ z savem by dzia³a³o
         if (customIntervalSettingsScriptable && !isDevMode) { 
             setSpecificIntervals(customIntervalSettingsScriptable.isInterval); 
         }
@@ -159,15 +165,16 @@ public class GuessIntervalMode : MonoBehaviour
             button1.onClick.AddListener(goodAnswer);
         }
 
-        playAudio.playOctaveInterval(resultInterval, false, true, isStableNote);
+        playAudio.playOctaveInterval(resultInterval, isUp, true, isStableNote);
     }
 
 
     void goodAnswer()
     {
         result += 1;
-        changeButtons();
         playAudio.setBoolIsStableNote(false);
+        changeButtons();
+
     }
     void wrongAnswer()
     {
@@ -189,11 +196,15 @@ public class GuessIntervalMode : MonoBehaviour
     }
     void playInterval()
     {
-        playAudio.playOctaveInterval(resultInterval,true,true,isStableNote) ;
+        playAudio.playOctaveInterval(resultInterval,isUp,true,isStableNote) ;
     }
     void setResultText()
     {
-        resultText.text = result.ToString();
+        //resultText.text = result.ToString();
+
+        PersistentVariablesSource source = LocalizationSettings.StringDatabase.SmartFormatter.GetSourceExtension<PersistentVariablesSource>();
+        IntVariable myResult = source["UIGlobal"]["result"] as IntVariable;
+        myResult.Value = result;
     }
     private void setHPText()
     {

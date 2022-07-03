@@ -762,6 +762,7 @@ GameObject:
   - component: {fileID: 1269215111}
   - component: {fileID: 1269215113}
   - component: {fileID: 1269215112}
+  - component: {fileID: 1269215114}
   m_Layer: 5
   m_Name: Result
   m_TagString: Untagged
@@ -830,6 +831,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1269215110}
   m_CullTransparentMesh: 1
+--- !u!114 &1269215114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1269215110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:08207773de60d1d4d8e2cf1f85da601c
+    m_TableEntryReference:
+      m_KeyId: 117827674112
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables:
+    - name: Global
+      variable:
+        id: 0
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1269215112}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 1
+    00000000:
+      type: {class: NestedVariablesGroup, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: {fileID: 11400000, guid: 9eb3003606e4831438b9f124db65c819, type: 2}
 --- !u!1 &1342314647
 GameObject:
   m_ObjectHideFlags: 0
@@ -1217,6 +1264,22 @@ PrefabInstance:
       propertyPath: customIntervalSettingsScriptable
       value: 
       objectReference: {fileID: 11400000, guid: adaecd930e5891c44a882e57e69d0cae, type: 2}
+    - target: {fileID: 1309364330169187706, guid: 904f9f55df16b81479c0d872c171324d, type: 3}
+      propertyPath: resultString.m_LocalVariables.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1309364330169187706, guid: 904f9f55df16b81479c0d872c171324d, type: 3}
+      propertyPath: resultString.m_TableEntryReference.m_KeyId
+      value: 117827674112
+      objectReference: {fileID: 0}
+    - target: {fileID: 1309364330169187706, guid: 904f9f55df16b81479c0d872c171324d, type: 3}
+      propertyPath: resultString.m_LocalVariables.Array.data[0].name
+      value: ui
+      objectReference: {fileID: 0}
+    - target: {fileID: 1309364330169187706, guid: 904f9f55df16b81479c0d872c171324d, type: 3}
+      propertyPath: resultString.m_TableReference.m_TableCollectionName
+      value: GUID:08207773de60d1d4d8e2cf1f85da601c
+      objectReference: {fileID: 0}
     - target: {fileID: 1309364330169187711, guid: 904f9f55df16b81479c0d872c171324d, type: 3}
       propertyPath: m_Name
       value: Controller

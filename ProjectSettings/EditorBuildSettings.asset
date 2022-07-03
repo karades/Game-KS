@@ -17,4 +17,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DevPlayAudio.unity
     guid: 3b1643b162f2a994ea4cd8a5bf36beb4
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: c9e9155e60b87f6409d8178ac96b895a, type: 2}
+    com.unity.localization.settings: {fileID: 11400000, guid: a6e510b3914d60543aac77c0a9081599, type: 2}
