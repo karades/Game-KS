@@ -62,9 +62,9 @@ public class PlayAudio : MonoBehaviour
 
     bool isStableNoteSelected = false;
 
-
+    bool initialize = false;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         audioClips = Resources.LoadAll("samples", typeof(AudioClip));
     }
@@ -83,20 +83,18 @@ public class PlayAudio : MonoBehaviour
 
         }
 
-        
     }
 
-    public void setBoolIsStableNote(bool truth)
+    public void setBoolIsStableNote(bool isTrue)
     {
-        isStableNoteSelected = truth;
+        isStableNoteSelected = isTrue;
     }
     void changeStableNote(int interval)
     {
-        if (!isStableNoteSelected)
-        {
+
             stableNote = Random.Range(interval, audioClips.Length - interval);
-            isStableNoteSelected = true;
-        }
+            randomNumber = stableNote;
+
     }
     void playRandomNote()
     {
@@ -119,17 +117,25 @@ public class PlayAudio : MonoBehaviour
 
     public void playOctaveInterval(int interval, bool isUp = false, bool isMelodic = false, bool isStableNote = false)
     {
-        interval -= 1;
+        
+        interval -= 1; //input is like real life, but in terms of code it has to be -1, we start from 0
+
         GameObject newNote = Instantiate(NotePlayer);
         GameObject newNote2 = Instantiate(NotePlayer);
 
         if (isStableNote)
         {
-            changeStableNote(interval);
+            if (!isStableNoteSelected)
+            {
+                changeStableNote(interval);
+                isStableNoteSelected = true;
+            }
         }
         else
         {
-            randomNumber = Random.Range(interval, audioClips.Length - interval);
+            if (isUp) { randomNumber = Random.Range(interval, audioClips.Length - interval); }
+            else { randomNumber = Random.Range(interval, audioClips.Length); }
+            
 
         }
 
