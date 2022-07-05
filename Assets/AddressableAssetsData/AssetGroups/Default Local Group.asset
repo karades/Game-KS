@@ -16,7 +16,16 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: b8a88a9525578c2429a81070c1359d86
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 9eb3003606e4831438b9f124db65c819
+    m_Address: Assets/Localization/UIGlobal.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b38057987fdda8443b4725083cae1498
+    m_Address: English (en)
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Locale
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 3b561f28da7dc0141a72b91045035d46, type: 2}
   m_SchemaSet:

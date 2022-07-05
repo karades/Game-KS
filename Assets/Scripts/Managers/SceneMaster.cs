@@ -21,4 +21,8 @@ public class SceneMaster : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
     }
+    public void exit()
+    {
+        Application.Quit();
+    }
 }

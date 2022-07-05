@@ -21,6 +21,10 @@ MonoBehaviour:
     m_Address: Assets/Localization/Tables/UI Text Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
+  - m_GUID: ef9b80ce5113d2c4e9e09cb79bc2bde2
+    m_Address: Assets/Localization/Tables/MainMenu Text Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 3b561f28da7dc0141a72b91045035d46, type: 2}
   m_SchemaSet:

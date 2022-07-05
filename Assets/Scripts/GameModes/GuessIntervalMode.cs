@@ -29,12 +29,21 @@ public class GuessIntervalMode : MonoBehaviour
     [SerializeField]
     CustomIntervalSettingsScriptable customIntervalSettingsScriptable;
 
+
+
+    [SerializeField]
+    GameObject gameOver;
+    [SerializeField]
+    GameObject game;
+
     public int result = 0;
 
     [SerializeField]
     int HP = 3;
 
     int resultInterval;
+
+    private int intervalsToWin = 5;
 
     string wrongIntervalText;
     string intervalText;
@@ -50,12 +59,11 @@ public class GuessIntervalMode : MonoBehaviour
     [SerializeField]
     bool isDevMode = true;
 
-    bool isUp = false;
-    public bool IsUp { get; set; }
+    bool isUp;
 
     void Start()
     {
-
+        isUp = customIntervalSettingsScriptable.isUp;
         setResultText();
         setHPText();
         setPlayIntervalButton();
@@ -80,14 +88,44 @@ public class GuessIntervalMode : MonoBehaviour
     List<int> getIntervalsList()
     {
         intervalsToGuess.Clear();
-        //co z isInterval? Z innej klasy?
-        for (int i = 0; i < isInterval.Length; i++)
-        {
-            if (isInterval[i])
+        bool isAnyInterval = false;
+        if (isDevMode)
+        { 
+            for (int i = 0; i < isInterval.Length; i++)
             {
-                intervalsToGuess.Add(i+1);
+                if (isInterval[i])
+                {
+                    intervalsToGuess.Add(i + 1);
+                    isAnyInterval = true;
+                }
             }
         }
+        else
+        {
+
+            for (int i = 0; i < customIntervalSettingsScriptable.isInterval.Length; i++)
+            {
+                
+                if (customIntervalSettingsScriptable.isInterval[i])
+                {
+                    intervalsToGuess.Add(i + 1);
+                    isAnyInterval = true;
+                }
+            }
+        }
+        if (!isAnyInterval)
+        {
+            Debug.LogError("No intervals selected, used from devmode" + this);
+            for (int i = 0; i < isInterval.Length; i++)
+            {
+                if (isInterval[i])
+                {
+                    intervalsToGuess.Add(i + 1);
+                    isAnyInterval = true;
+                }
+            }
+        }
+        
         return intervalsToGuess;
     }
     void setSpecificIntervals(bool[] isIntervalsF)
@@ -186,7 +224,8 @@ public class GuessIntervalMode : MonoBehaviour
         }
         else
         {
-            //end
+            gameOver.SetActive(true);
+            game.SetActive(false);
         }
     }
 

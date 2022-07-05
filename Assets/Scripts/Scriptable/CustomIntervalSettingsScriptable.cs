@@ -7,4 +7,6 @@ public class CustomIntervalSettingsScriptable : ScriptableObject
 {
 
     public bool[] isInterval = new bool[13];
+    public bool isSelectedFromMenu = false;
+    public bool isUp = true;
 }
